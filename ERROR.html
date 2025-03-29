@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="LGNX_.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LGN X - Mantenimiento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --color-gold: #D4AF37;
+            --color-black: #151515;
+        }
+
+        body {
+            background-color: var(--color-black);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        @keyframes tool-spin {
+            0% { transform: rotate(0deg) translateX(10px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(10px) rotate(-360deg); }
+        }
+
+        @keyframes tool-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .tool-icon {
+            animation: 
+                tool-spin 3s linear infinite,
+                tool-bounce 1s ease-in-out infinite;
+        }
+
+        .glitch-text {
+            position: relative;
+            color: var(--color-gold);
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -2px 0 red;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -2px 0 blue;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(36px, 9999px, 9px, 0); }
+            25% { clip: rect(25px, 9999px, 85px, 0); }
+            50% { clip: rect(54px, 9999px, 33px, 0); }
+            75% { clip: rect(12px, 9999px, 66px, 0); }
+            100% { clip: rect(77px, 9999px, 99px, 0); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(29px, 9999px, 61px, 0); }
+            25% { clip: rect(58px, 9999px, 12px, 0); }
+            50% { clip: rect(88px, 9999px, 55px, 0); }
+            75% { clip: rect(16px, 9999px, 44px, 0); }
+            100% { clip: rect(99px, 9999px, 33px, 0); }
+        }
+    </style>
+</head>
+<body class="flex flex-col">
+    <!-- Fondo de partículas -->
+    <div id="particles-js"></div>
+
+    <!-- Contenido Principal -->
+    <div class="container mx-auto px-4 py-16 flex-grow flex items-center justify-center">
+        <div class="text-center bg-black bg-opacity-70 p-12 rounded-xl max-w-2xl w-full">
+            <div class="mb-8 relative">
+                <h1 class="text-8xl md:text-6xl font-bold glitch-text" data-text="404">404</h1>
+                <div class="absolute top-0 right-0 text-5xl tool-icon">
+                    <i class="fas fa-tools text-[#D4AF37]"></i>
+                </div>
+            </div>
+            
+            <div class="mb-8">
+                <h2 class="text-3xl md:text-2xl text-[#D4AF37] mb-4">🚧 Página en mantenimiento 🚧</h2>
+                <p class="text-xl md:text-base text-white mb-6">
+                    Estamos trabajando en mejoras y nuevas actualizaciones. ¡Vuelve pronto para ver las novedades! 🔧✨
+                </p>
+            </div>
+
+            <div class="space-x-4">
+                <a href="index.html" class="bg-[#D4AF37] text-black px-6 py-3 rounded-full hover:bg-opacity-80 inline-block">
+                    Volver al Inicio
+                </a>
+                <a href="https://www.youtube.com/@ItzJoshuaX?sub_confirmation=1 " class="border-2 border-[#D4AF37] text-[#D4AF37] px-6 py-3 rounded-full hover:bg-[#D4AF37] hover:text-black inline-block">
+                    Reportar Error
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-50 py-6 relative z-10">
+        <div class="container mx-auto text-center">
+            <div class="flex justify-center space-x-8 mb-4">
+                <a href="#" class="text-[#D4AF37] hover:text-white text-2xl"><i class="fab fa-discord"></i></a>
+                <a href="https://steamcommunity.com/profiles/76561198918757911/" class="text-[#D4AF37] hover:text-white text-2xl"><i class="fab fa-steam"></i></a>
+                <a href="https://www.twitch.tv/fenjoshuax" class="text-[#D4AF37] hover:text-white text-2xl"><i class="fab fa-twitch"></i></a>
+                <a href="https://www.youtube.com/@ItzJoshuaX?sub_confirmation=1 " class="text-[#D4AF37] hover:text-white text-2xl"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="text-white text-sm">&copy; 2025 LGN X. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Librerías -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <script>
+        // Animación de partículas
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#D4AF37' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: false },
+                move: {
+                    enable: true,
+                    speed: 1,
+                    direction: 'top',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: { detect_on: 'canvas', events: { onhover: { enable: false } } },
+            retina_detect: true
+        });
+    </script>
+</body>
+</html>

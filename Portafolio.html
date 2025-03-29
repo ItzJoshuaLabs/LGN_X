@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="LGNX_.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portafolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --light-gold: #F5D76E;
+            --dark-gold: #AA8C2C;
+            --black: #151515;
+            --dark-gray: #222222;
+            --white: #FFFFFF;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes floatingParticles {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 50%, var(--black) 100%);
+            color: var(--white);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--gold), var(--light-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, var(--gold), var(--light-gold));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--light-gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 0;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 5px solid var(--gold);
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-text {
+            max-width: 500px;
+        }
+
+        .hero-text h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--gold), var(--light-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--gold), var(--light-gold));
+            color: var(--black);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
+        }
+
+        .section-title {
+            font-size: 32px;
+            text-align: center;
+            margin: 60px 0 40px;
+            background: linear-gradient(90deg, var(--gold), var(--light-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skills-section {
+            padding: 60px 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .skill-item {
+            width: 250px;
+            text-align: center;
+            padding: 30px;
+            background: rgba(33, 33, 33, 0.7);
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .skill-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--light-gold);
+        }
+
+        .skill-percentage {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            margin: 0 auto 20px;
+        }
+
+        .skill-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(var(--gold) 0%, var(--gold) var(--percent), rgba(255, 255, 255, 0.1) var(--percent), rgba(255, 255, 255, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .skill-circle::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            background: var(--dark-gray);
+            border-radius: 50%;
+        }
+
+        .skill-percent {
+            position: relative;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .portfolio-section {
+            padding: 60px 0;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            height: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+
+        .portfolio-title {
+            color: var(--light-gold);
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .portfolio-description {
+            color: var(--white);
+            font-size: 14px;
+        }
+
+        .contact-section {
+            padding: 60px 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background: rgba(33, 33, 33, 0.7);
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--light-gold);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--gold), var(--light-gold));
+            color: var(--black);
+            font-weight: 600;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .submit-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            color: var(--white);
+            font-size: 24px;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            background: rgba(33, 33, 33, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-5px) rotate(360deg);
+            color: var(--gold);
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+
+        .copyright {
+            color: var(--white);
+            font-size: 14px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <nav class="navbar">
+        <div class="logo">ItzJoshuaX</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#inicio">Inicio</a>
+            <a href="#habilidades">Habilidades</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="hero-section" id="inicio">
+            <div class="profile-image">
+                <img src="Me2.jpg" alt="Foto de perfil">
+            </div>
+            <div class="hero-text">
+                <h1>ItzJoshuaX</h1>
+                <p>Soy un desarrollador web apasionado por crear experiencias digitales únicas. Con más de 1 año de experiencia, he trabajado en diversos proyectos que combinan diseño elegante con funcionalidad robusta.</p>
+                <p>Especializado en desarrollo frontend y diseño UI/UX, siempre busco nuevos desafíos que me permitan seguir creciendo profesionalmente.</p>
+                <a href="#contacto" class="cta-button">Contáctame</a>
+            </div>
+        </section>
+
+        <section class="skills-section" id="habilidades">
+            <h2 class="section-title">Mis Habilidades</h2>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <h3 class="skill-title">HTML/CSS</h3>
+                    <div class="skill-percentage">
+                        <div class="skill-circle" style="--percent: 95%;">
+                            <div class="skill-percent">95%</div>
+                        </div>
+                    </div>
+                    <p>Estructuración y diseño web avanzado</p>
+                </div>
+                <div class="skill-item">
+                    <h3 class="skill-title">JavaScript</h3>
+                    <div class="skill-percentage">
+                        <div class="skill-circle" style="--percent: 80%;">
+                            <div class="skill-percent">80%</div>
+                        </div>
+                    </div>
+                    <p>Programación frontend y desarrollo de interacciones</p>
+                </div>
+                <div class="skill-item">
+                    <h3 class="skill-title">UX/UI Design</h3>
+                    <div class="skill-percentage">
+                        <div class="skill-circle" style="--percent: 85%;">
+                            <div class="skill-percent">85%</div>
+                        </div>
+                    </div>
+                    <p>Diseño de interfaces y experiencia de usuario</p>
+                </div>
+                <div class="skill-item">
+                    <h3 class="skill-title">React</h3>
+                    <div class="skill-percentage">
+                        <div class="skill-circle" style="--percent: 65%;">
+                            <div class="skill-percent">65%</div>
+                        </div>
+                    </div>
+                    <p>Desarrollo de aplicaciones con React.js</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="portfolio-section" id="proyectos">
+            <h2 class="section-title">Proximos Proyectos</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="Proceso.webp" alt="Proyecto 1">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">1️⃣ Crear Juego de Roblox</h3>
+                        <p class="portfolio-description">Desarrollo de un juego en Roblox Studio utilizando scripting en Lua. Se define la mecánica de juego, se diseñan los mapas y se implementan funciones interactivas para los jugadores. Se enfoca en optimización, jugabilidad y posibles monetizaciones.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="Proceso1.jpg" alt="Proyecto 2">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">2️⃣ Venta de Front-end</h3>
+                        <p class="portfolio-description">Creación y venta de interfaces visuales para sitios web y streamers. Se diseña utilizando tecnologías como HTML, CSS y JavaScript, asegurando un diseño atractivo y responsivo. Se comercializa a través de plataformas digitales con opciones de pago como Mercado Pago.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="Proceso2.jpg" alt="Proyecto 3">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">3️⃣ Creador de Contenido</h3>
+                        <p class="portfolio-description">Producción y edición de videos para plataformas como YouTube y TikTok, combinando gameplay, tutoriales y contenido tecnológico. Se aplican técnicas de edición, efectos visuales y estrategias de optimización SEO para aumentar el alcance y la audiencia.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="Proceso3.jpg" alt="Proyecto 4">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-title">4️⃣ Streaming</h3>
+                        <p class="portfolio-description">Realización de transmisiones en vivo en Twitch y Kick, con enfoque en videojuegos y contenido interactivo. Se utilizan overlays personalizados, alertas y una estructura de contenido que fomente la participación de la audiencia para mejorar la retención y crecimiento del canal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section" id="contacto">
+            <h2 class="section-title">Contacto</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensaje</label>
+                    <textarea id="message" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Enviar Mensaje</button>
+            </form>
+        </section>
+    </div>
+
+    <footer>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/ItzJoshuaLabs"><i class="fab fa-github"></i></a>
+            <a href="https://x.com/ItzJoshuaX_"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/itzjoshuax_official/"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p class="copyright">&copy; 2025 LGN X. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Crear partículas doradas
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            
+            // Crear 50 partículas
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Tamaño aleatorio entre 2px y 6px
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Posición inicial aleatoria
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Animación con duración y retardo aleatorios
+                particle.style.animation = `floatingParticles ${Math.random() * 15 + 10}s linear infinite`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        });
+    </script>
+</body>
+</html>
